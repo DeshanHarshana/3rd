@@ -22,18 +22,30 @@ import { RegisterComponent } from './components/register/register.component';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { RootComponent } from './components/root/root.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
+import { EventsComponent } from './components/events/events.component';
+import { SpecialComponent } from './components/special/special.component';
 
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { AuthService } from './services/auth.service';
+
+import { EventService } from './services/event.service';
+import { AuthGuard } from './gurad/auth.guard';
+import { TokenInterceptorService } from './services/token-interceptor.service';
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     RegisterComponent,
     RootComponent,
-    DashboardComponent
+    DashboardComponent,
+    EventsComponent,
+    SpecialComponent,
+
   ],
   imports: [
     BrowserModule,
     FormsModule,
+    HttpClientModule,
   ReactiveFormsModule,
   MatCheckboxModule,
   MatFormFieldModule,
@@ -52,7 +64,12 @@ import { DashboardComponent } from './components/dashboard/dashboard.component';
   MatOptionModule,
   MatProgressSpinnerModule
   ],
-  providers: [],
+  providers: [AuthService, EventService, AuthGuard,
+  {
+    provide:HTTP_INTERCEPTORS,
+    useClass:TokenInterceptorService,
+    multi:true
+  }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

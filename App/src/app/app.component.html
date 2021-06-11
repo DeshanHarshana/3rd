@@ -3,9 +3,15 @@
   <mat-toolbar-row>
     <!--  <span>HOME</span> -->
      <span><a href="/">App Icon</a></span>
+     <a mat-button routerLink="/events" routerLinkActive="active">Global Events</a>
+     <a mat-button routerLink="/special" routerLinkActive="active">Member</a>
      <span class="spacer"></span>
-     <a mat-button routerLink="/register">Register</a>
-     <a mat-button routerLink="/login">Login</a>
+     <a mat-button *ngIf="!_authService.loggedIn()" routerLink="/register" routerLinkActive="active">Register</a>
+     <a mat-button *ngIf="!_authService.loggedIn()" routerLink="/login" routerLinkActive="active">Login</a>
+     <a mat-button *ngIf="_authService.loggedIn()" (click)="_authService.logout()" routerLinkActive="active">Logout</a>
+
   </mat-toolbar-row>
 </mat-toolbar>
+
 <router-outlet></router-outlet>
+
