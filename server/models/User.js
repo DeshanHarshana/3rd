@@ -4,8 +4,11 @@ const Schema=mongoose.Schema
 const userSchema =mongoose.Schema({
     email:String,
     password:String,
+    emailVerified:Boolean,
     data:{
-        firstname:String
+        firstname:String,
+       
+        emailToken:String
     }
 })
 

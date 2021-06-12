@@ -40,6 +40,7 @@
             </div>
 
             <div class="form-group">
+              <img src="assets/200.gif" width="35px" height="35px" class="float-right" [(hidden)]="imageHidden">
               <input type="submit" value="Register" [disabled]="checkPasswords() || f.invalid"  (click)="registerUser()" class="btn float-right login_btn">
             </div>
           </form>
@@ -47,10 +48,12 @@
         <div class="card-footer">
           <div class="d-flex justify-content-center links">
             Do have an account?<a href="/login">Sign In</a>
+
           </div>
 
         </div>
       </div>
     </div>
   </div>
+
   </body>

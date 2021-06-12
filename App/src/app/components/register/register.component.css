@@ -80,6 +80,10 @@ color: black;
 background-color: white;
 }
 
+.loading{
+  text-align: left;
+}
+
 .links{
 color: white;
 }

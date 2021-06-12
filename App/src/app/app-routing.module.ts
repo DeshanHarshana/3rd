@@ -6,6 +6,7 @@ import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
 import { RootComponent } from './components/root/root.component';
 import { SpecialComponent } from './components/special/special.component';
+import { VerifiedSuccessComponent } from './components/verified-success/verified-success.component';
 import { AuthGuard } from './gurad/auth.guard';
 
 const routes: Routes = [
@@ -15,8 +16,9 @@ const routes: Routes = [
   { path: 'dashboard', component: DashboardComponent },
   { path : "events", component:EventsComponent},
   {path:"special", component:SpecialComponent,
-//canActivate : [AuthGuard]
-}
+canActivate : [AuthGuard]
+},
+{path:'email-verify', component:VerifiedSuccessComponent}
 ];
 
 @NgModule({
@@ -27,5 +29,6 @@ export class AppRoutingModule { }
 export const AppRoutingComponent=[
   LoginComponent,
   RegisterComponent,
-  RootComponent
+  RootComponent,
+  VerifiedSuccessComponent
 ]

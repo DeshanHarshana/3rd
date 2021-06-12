@@ -31,6 +31,9 @@ import { AuthService } from './services/auth.service';
 import { EventService } from './services/event.service';
 import { AuthGuard } from './gurad/auth.guard';
 import { TokenInterceptorService } from './services/token-interceptor.service';
+import { ToastrModule } from 'ngx-toastr';
+import { VerifiedSuccessComponent } from './components/verified-success/verified-success.component';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -40,9 +43,11 @@ import { TokenInterceptorService } from './services/token-interceptor.service';
     DashboardComponent,
     EventsComponent,
     SpecialComponent,
+    VerifiedSuccessComponent,
 
   ],
   imports: [
+    ToastrModule.forRoot(),
     BrowserModule,
     FormsModule,
     HttpClientModule,
