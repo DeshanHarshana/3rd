@@ -39,7 +39,11 @@ loginUserData={
         else{
             console.log(res)
             localStorage.setItem('token', res.token)
+            localStorage.setItem('currentUser', res.uid);
+            localStorage.setItem('email','true');
+            console.log(localStorage.getItem('currentUser'));
             this.router.navigate(['/special'])
+
       }},
       err=>{
         console.log(err)

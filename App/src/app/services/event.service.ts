@@ -13,6 +13,7 @@ export class EventService {
   ) { }
 
   getEvents(){
+    localStorage.setItem('login','yes')
     return this._http.get<any>(this._eventUrl)
 
 

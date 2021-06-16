@@ -1,0 +1,225 @@
+<link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet">
+
+<body>
+  <div class="main-content">
+    <!-- Top navbar -->
+    <nav class="navbar navbar-top navbar-expand-md navbar-dark" id="navbar-main">
+      <div class="container-fluid">
+
+
+        <!-- User -->
+        <ul class="navbar-nav align-items-center d-none d-md-flex">
+          <li class="nav-item dropdown">
+            <a class="nav-link pr-0" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <div class="media align-items-center">
+                <span class="avatar avatar-sm rounded-circle">
+                  <img [src]=imageData>
+                </span>
+                <div class="media-body ml-2 d-none d-lg-block">
+                  <span class="mb-0 text-sm  font-weight-bold" *ngIf="currentUser!=null">{{currentUser.firstname}}</span>
+                </div>
+              </div>
+            </a>
+
+          </li>
+        </ul>
+      </div>
+    </nav>
+    <!-- Header -->
+    <div class="header pb-8 pt-5 pt-lg-8 d-flex align-items-center" style="min-height: 600px; background-image: url(https://raw.githack.com/creativetimofficial/argon-dashboard/master/assets/img/theme/profile-cover.jpg); background-size: cover; background-position: center top;">
+      <!-- Mask -->
+      <span class="mask bg-gradient-default opacity-8"></span>
+      <!-- Header container -->
+      <div class="container-fluid d-flex align-items-center">
+        <div class="row">
+          <div class="col-lg-7 col-md-10">
+            <h1 class="display-2 text-white" *ngIf="currentUser!=null">{{currentUser.firstname}}</h1>
+            <p class="text-white mt-0 mb-5">This is your profile page. You can see the progress you've made with your work and manage your projects or assigned tasks</p>
+            <button (click)="goEditMode()" class="btn btn-info">Edit profile</button>
+            <button (click)="goViewMode()" class="btn btn-info">View profile</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Page content -->
+    <div class="container-fluid mt--7">
+      <div class="row">
+        <div class="col-xl-4 order-xl-2 mb-5 mb-xl-0">
+          <div class="card card-profile shadow">
+            <div class="row justify-content-center">
+              <div class="col-lg-3 order-lg-2">
+
+                  <div class="container">
+                  <div class="card-profile-image">
+                    <img [src]="imageData"  (click)="alart()" class="rounded-circle">
+                    <div class="middle">
+
+                      <div class="text">Change</div>
+                      <input type="file" class="inputfile" (change)="onFileSelect($event)" name="file" id="file" >
+                      <label for="file">Choose a file</label>
+
+                    </div>
+
+                  </div>
+
+                </div>
+
+              </div>
+
+            </div>
+            <div class="card-header text-center border-0 pt-8 pt-md-4 pb-0 pb-md-4">
+              <div class="d-flex justify-content-between">
+                <a href="#" class="btn btn-sm btn-info mr-4">Connect</a>
+                <a href="#" class="btn btn-sm btn-default float-right">Message</a>
+              </div>
+            </div>
+
+            <div class="card-body pt-0 pt-md-4">
+
+
+              <div class="row">
+
+                <div class="col">
+                  <div class="card-profile-stats d-flex justify-content-center mt-md-5" >
+<button class="btn btn-sm btn-default float-right" [(hidden)]="uploadButton" (click)=uploadImage() >Update Profile Picture</button>
+                  </div>
+                  <div class="card-profile-stats d-flex justify-content-center mt-md-5">
+                    <div>
+                      <span class="heading">22</span>
+                      <span class="description">Follow</span>
+                    </div>
+
+                    <div>
+                      <span class="heading">89</span>
+                      <span class="description">Posts</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="text-center">
+                <h3 *ngIf="currentUser!=null">
+                  {{currentUser.firstname}}<span class="font-weight-light">, {{currentUser.Age}}</span>
+                </h3>
+                <div class="h5 font-weight-300" *ngIf="currentUser!=null">
+                  <i class="ni location_pin mr-2"></i>{{currentUser.City}}, {{currentUser.Country}}
+                </div>
+                <div class="h5 mt-4" *ngIf="currentUser!=null">
+                  <i class="ni business_briefcase-24 mr-2"></i>{{currentUser.Title}}
+                </div>
+                <div *ngIf="currentUser!=null">
+                  <i class="ni education_hat mr-2"></i>{{currentUser.University}}
+                </div>
+                <hr class="my-4">
+                <p *ngIf="currentUser!=null">{{currentUser.About}}</p>
+
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-xl-8 order-xl-1">
+          <div class="card bg-secondary shadow">
+            <div class="card-header bg-white border-0">
+              <div class="row align-items-center">
+                <div class="col-8">
+                  <h3 class="mb-0">My account</h3>
+                </div>
+
+              </div>
+            </div>
+            <div class="card-body">
+              <form [formGroup]="profileForm">
+                <h6 class="heading-small text-muted mb-4">User information</h6>
+                <div class="pl-lg-4">
+                  <div class="row">
+                    <div class="col-lg-6">
+                      <div class="form-group focused">
+                        <label class="form-control-label" for="input-username">Username</label>
+                        <input type="text" [(hidden)]="!editmode" id="input-username" *ngIf="currentUser!=null" value="currentUser.firstname" formControlName="firstname" class="form-control form-control-alternative" placeholder="Firstname" >
+                        <br><label [(hidden)]="editmode" *ngIf="currentUser!=null" class="font-weight-bold">{{currentUser.firstname}}</label>
+                      </div>
+                    </div>
+                    <div class="col-lg-6">
+                      <div class="form-group">
+                        <label class="form-control-label" *ngIf="currentUser!=null" value="currentUser.email" for="input-email">Email address</label>
+                        <br><label  *ngIf="currentUser!=null" class="font-weight-bold">{{currentUser.email}}</label>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-lg-6">
+                      <div class="form-group focused">
+                        <label class="form-control-label" for="input-first-name">First name</label>
+                        <input type="text" [(hidden)]="!editmode" formControlName="firstname" value="currentUser.firstname" *ngIf="currentUser!=null" id="input-first-name" class="form-control form-control-alternative" placeholder="Firstname">
+                        <br><label [(hidden)]="editmode" *ngIf="currentUser!=null" class="font-weight-bold">{{currentUser.firstname}}</label>
+                      </div>
+                    </div>
+                    <div class="col-lg-6">
+                      <div class="form-group focused">
+                        <label class="form-control-label" for="input-last-name">Age</label>
+                        <input type="text" [(hidden)]="!editmode" id="input-last-name" value="currentUser.Age" *ngIf="currentUser!=null" formControlName="Age" class="form-control form-control-alternative" placeholder="Age">
+                        <br><label [(hidden)]="editmode" *ngIf="currentUser!=null" class="font-weight-bold">{{currentUser.Age}}</label>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <hr class="my-4">
+                <!-- Address -->
+                <h6 class="heading-small text-muted mb-4">Contact information</h6>
+                <div class="pl-lg-4">
+                  <div class="row">
+                    <div class="col-md-12">
+                      <div class="form-group focused">
+                        <label class="form-control-label" for="input-address">Address</label>
+                        <input  id="input-address" [(hidden)]="!editmode" value="currentUser.Address" *ngIf="currentUser!=null" formControlName="Address" class="form-control form-control-alternative" placeholder="Home Address" type="text">
+                        <br><label [(hidden)]="editmode" *ngIf="currentUser!=null" class="font-weight-bold">{{currentUser.Address}}</label>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-lg-4">
+                      <div class="form-group focused">
+                        <label class="form-control-label" for="input-city">City</label>
+                        <input type="text" [(hidden)]="!editmode" id="input-city" value="currentUser.City" *ngIf="currentUser!=null" formControlName="City" class="form-control form-control-alternative" placeholder="City">
+                        <br><label [(hidden)]="editmode" *ngIf="currentUser!=null" class="font-weight-bold">{{currentUser.City}}</label>
+                      </div>
+                    </div>
+                    <div class="col-lg-4">
+                      <div class="form-group focused">
+                        <label class="form-control-label" for="input-country">Country</label>
+                        <input type="text" [(hidden)]="!editmode" *ngIf="currentUser!=null" value="currentUser.Country" formControlName="Country" id="input-country" class="form-control form-control-alternative" placeholder="Country" >
+                        <br><label [(hidden)]="editmode" *ngIf="currentUser!=null" class="font-weight-bold">{{currentUser.Country}}</label>
+                      </div>
+                    </div>
+                    <div class="col-lg-4">
+                      <div class="form-group">
+                        <label class="form-control-label" for="input-country">Postal code</label>
+                        <input type="number" [(hidden)]="!editmode" *ngIf="currentUser!=null" value="currentUser.PostalCode" formControlName="PostalCode"  id="input-postal-code" class="form-control form-control-alternative" placeholder="Postal code">
+                        <br><label [(hidden)]="editmode" *ngIf="currentUser!=null" class="font-weight-bold">{{currentUser.PostalCode}}</label>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <hr class="my-4">
+                <!-- Description -->
+                <h6 class="heading-small text-muted mb-4">About me</h6>
+                <div class="pl-lg-4">
+                  <div class="form-group focused">
+                    <label>About Me</label>
+
+                    <textarea rows="4"  [(hidden)]="!editmode" *ngIf="currentUser!=null" value="currentUser.About"  formControlName="About" class="form-control form-control-alternative" placeholder="A few words about you ..."></textarea>
+                    <br><label [(hidden)]="editmode" *ngIf="currentUser!=null" class="font-weight-bold">{{currentUser.About}}</label>
+
+                  </div>
+                </div>
+                <div class="text-right">
+                  <button type="submit" (click)="update(profileForm.value)"   class="btn btn-sm btn-primary">Update</button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</body>

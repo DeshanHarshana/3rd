@@ -17,9 +17,8 @@ export class RegisterComponent implements OnInit {
   registerUserData={
     email:'',
     password:'',
-    data:{
-      firstname:''
-    }
+    firstname:''
+
   }
   constructor(
     public _auth:AuthService,

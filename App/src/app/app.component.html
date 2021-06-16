@@ -2,13 +2,14 @@
 <mat-toolbar color="primary">
   <mat-toolbar-row>
     <!--  <span>HOME</span> -->
-     <span><a href="/">App Icon</a></span>
+     <span><a href="/"><img src="../assets/Appicon.png" width="50px" height="50px"></a></span>
      <a mat-button routerLink="/events" routerLinkActive="active">Global Events</a>
      <a mat-button routerLink="/special" routerLinkActive="active">Member</a>
      <span class="spacer"></span>
      <a mat-button *ngIf="!_authService.loggedIn()" routerLink="/register" routerLinkActive="active">Register</a>
      <a mat-button *ngIf="!_authService.loggedIn()" routerLink="/login" routerLinkActive="active">Login</a>
-     <a mat-button *ngIf="_authService.loggedIn()" (click)="_authService.logout()" routerLinkActive="active">Logout</a>
+     <a mat-button *ngIf="_authService.loggedIn() && _authService.emailVerified()" (click)="_authService.profile()" routerLinkActive="active">Profile</a>
+     <a mat-button *ngIf="_authService.loggedIn() && _authService.emailVerified() " (click)="_authService.handleWarningAlert()" routerLinkActive="active">Logout</a>
 
   </mat-toolbar-row>
 </mat-toolbar>

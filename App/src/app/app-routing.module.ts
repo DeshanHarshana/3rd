@@ -3,6 +3,8 @@ import { Routes, RouterModule } from '@angular/router';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { EventsComponent } from './components/events/events.component';
 import { LoginComponent } from './components/login/login.component';
+import { PostmakeComponent } from './components/postmake/postmake.component';
+import { ProfileComponent } from './components/profile/profile.component';
 import { RegisterComponent } from './components/register/register.component';
 import { RootComponent } from './components/root/root.component';
 import { SpecialComponent } from './components/special/special.component';
@@ -18,7 +20,9 @@ const routes: Routes = [
   {path:"special", component:SpecialComponent,
 canActivate : [AuthGuard]
 },
-{path:'email-verify', component:VerifiedSuccessComponent}
+{path:'email-verify', component:VerifiedSuccessComponent},
+{path:'profile/:id', component:ProfileComponent},
+{path:'add-post/:id', component:PostmakeComponent}
 ];
 
 @NgModule({
@@ -30,5 +34,7 @@ export const AppRoutingComponent=[
   LoginComponent,
   RegisterComponent,
   RootComponent,
-  VerifiedSuccessComponent
+  VerifiedSuccessComponent,
+  ProfileComponent,
+  PostmakeComponent
 ]

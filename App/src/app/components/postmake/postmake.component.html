@@ -1,0 +1,62 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>New Blog Post Template | PrepBootstrap</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+
+
+</head>
+<body>
+
+<div class="container">
+
+<div class="page-header">
+    <h1>New Blog Post <small>A responsive blog post template</small></h1>
+</div>
+
+<!-- New Blog Post - START -->
+
+  <div class="container">
+    <div class="row" id="row_style">
+        <h4 class="text-center">Submit new post</h4>
+        <div class="col-md-4   col-md-offset-4">
+          <form [formGroup]="postgroup">
+            <div class="form-group">
+                <input type="text" formControlName="Title" class="form-control" placeholder="Title">
+            </div>
+            <textarea formControlName="Content" cols="30" rows="10">Submit your text post here...</textarea>
+            <br>
+
+            <div>
+                <button class="btn btn-primary" (click)="submitPost(postgroup.value)">Submit new post</button>
+            </div>
+          </form>
+        </div>
+
+    </div>
+</div>
+
+
+<style>
+    #row_style {
+        margin-top: 30px;
+    }
+
+    #submit {
+        display: block;
+        margin: auto;
+    }
+</style>
+
+<!-- you need to include the shieldui css and js assets in order for the charts to work -->
+<link rel="stylesheet" type="text/css" href="http://www.shieldui.com/shared/components/latest/css/light/all.min.css" />
+<script type="text/javascript" src="http://www.shieldui.com/shared/components/latest/js/shieldui-all.min.js"></script>
+
+
+</div>
+
+</body>
+</html>

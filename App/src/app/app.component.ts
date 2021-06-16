@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { AuthService } from './services/auth.service';
+import Swal from 'sweetalert2';
+
 
 @Component({
   selector: 'app-root',
@@ -9,5 +11,9 @@ import { AuthService } from './services/auth.service';
 export class AppComponent {
   title = 'App';
 
-  constructor(public _authService:AuthService){}
+  constructor(public _authService:AuthService
+
+    ){}
+
+
 }

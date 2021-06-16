@@ -27,12 +27,15 @@ import { SpecialComponent } from './components/special/special.component';
 
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthService } from './services/auth.service';
+import { DataServiceService } from './services/data-service.service';
 
 import { EventService } from './services/event.service';
 import { AuthGuard } from './gurad/auth.guard';
 import { TokenInterceptorService } from './services/token-interceptor.service';
 import { ToastrModule } from 'ngx-toastr';
 import { VerifiedSuccessComponent } from './components/verified-success/verified-success.component';
+import { ProfileComponent } from './components/profile/profile.component';
+import { PostmakeComponent } from './components/postmake/postmake.component';
 
 @NgModule({
   declarations: [
@@ -44,6 +47,8 @@ import { VerifiedSuccessComponent } from './components/verified-success/verified
     EventsComponent,
     SpecialComponent,
     VerifiedSuccessComponent,
+    ProfileComponent,
+    PostmakeComponent,
 
   ],
   imports: [
@@ -67,9 +72,11 @@ import { VerifiedSuccessComponent } from './components/verified-success/verified
   MatSlideToggleModule,
   MatSelectModule,
   MatOptionModule,
-  MatProgressSpinnerModule
+  MatProgressSpinnerModule,
+
+
   ],
-  providers: [AuthService, EventService, AuthGuard,
+  providers: [AuthService, EventService, AuthGuard, DataServiceService,
   {
     provide:HTTP_INTERCEPTORS,
     useClass:TokenInterceptorService,

@@ -1,0 +1,12 @@
+.fixedButton {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+
+}
+
+.button24 {
+
+  width: 100px;
+  height: 100px;
+}
