@@ -212,7 +212,7 @@
                   </div>
                 </div>
                 <div class="text-right">
-                  <button type="submit" (click)="update(profileForm.value)"   class="btn btn-sm btn-primary">Update</button>
+                  <button type="submit" (click)="update(profileForm.value)" [disabled]="updateButton"   class="btn btn-sm btn-primary">Update</button>
                 </div>
               </form>
             </div>

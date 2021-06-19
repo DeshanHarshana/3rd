@@ -1,0 +1,66 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>New Blog Post Template | PrepBootstrap</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://cdn.ckeditor.com/ckeditor5/28.0.0/classic/ckeditor.js"></script>
+
+
+</head>
+<body>
+  <div class="loader-container" *ngIf="loaderService.isLoading|async">
+    <mat-progress-spinner mode="indeterminate" style="top:50%; left:50%;"></mat-progress-spinner>
+  </div>
+<div class="container" style="padding-top: 4%; padding-bottom: 2%;">
+
+
+<!-- New Blog Post - START -->
+<div class="card text-center shadow-lg p-3 mb-5 bg-white rounded border-primary mb-3">
+  <div class="container" >
+    <h1 class="text-center">Update Post</h1>
+    <div class="row" id="row_style">
+        <div class="col">
+          <form [formGroup]="postgroup">
+            <div class="form-group">
+                <input type="text"  formControlName="Title" class="form-control" placeholder="Title">
+            </div>
+            <ckeditor [editor]="Editor" [config]="config" formControlName="Content"></ckeditor>
+            <br>
+
+            <div>
+                <button class="btn btn-primary" (click)="submitPost(postgroup.value)">Update post</button>
+            </div>
+          </form>
+
+        </div>
+
+        <br>
+
+    </div>
+
+</div>
+</div>
+<!-- -->
+
+<style>
+    #row_style {
+        margin-top: 30px;
+    }
+
+    #submit {
+        display: block;
+        margin: auto;
+    }
+</style>
+
+<!-- you need to include the shieldui css and js assets in order for the charts to work -->
+<link rel="stylesheet" type="text/css" href="http://www.shieldui.com/shared/components/latest/css/light/all.min.css" />
+<script type="text/javascript" src="http://www.shieldui.com/shared/components/latest/js/shieldui-all.min.js"></script>
+
+
+</div>
+
+</body>
+</html>

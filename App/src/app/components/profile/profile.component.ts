@@ -19,6 +19,7 @@ export class ProfileComponent implements OnInit {
   imageData:string; //temp save
   image:File;
   uploadButton:boolean=true;
+  updateButton:boolean=true;
   profileForm = new FormGroup({
     firstname:new FormControl(''),
     Age:new FormControl(''),
@@ -60,10 +61,12 @@ export class ProfileComponent implements OnInit {
     this.profileForm.get('PostalCode').setValue(this.currentUser.PostalCode);
     this.profileForm.get('About').setValue(this.currentUser.About);
     this.profileForm.get('Address').setValue(this.currentUser.Address);
+    this.updateButton=false;
   }
   goViewMode() {
     this.ngOnInit();
     this.editmode = false;
+    this.updateButton=true;
 
   }
 

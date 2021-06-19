@@ -1,0 +1,25 @@
+<html>
+  <body>
+    <div class="loader-container" *ngIf="loaderService.isLoading|async">
+      <mat-progress-spinner mode="indeterminate" style="top:50%; left:50%;"></mat-progress-spinner>
+    </div>
+    <div class="row mt-1 center" style="padding-top: 5%; padding-left:15%">
+      <div class="col-md-10 "  >
+        <div class="card text-center shadow-lg p-3 mb-5 bg-white rounded  border-primary mb-3" style="padding-top: 2%; padding-bottom: 2%;">
+          <div class="card-body">
+            <h1 class="card-title" *ngIf="details!=null">{{details.Title}}</h1><br>
+            <ckeditor *ngIf="details!=null" [editor]="Editor" [config]="config" [disabled]="true"  [(data)]="details.Content"></ckeditor>
+            <button class="btn btn-success" *ngIf="details!=null" (click)="goEdit(details._id)" [hidden]="currentUser!=details.Uid" >Edit Post</button>
+            <button class="btn btn-danger" *ngIf="details!=null" (click)="delete(details._id)" [hidden]="currentUser!=details.Uid">Delete Post</button>
+          </div>
+          <div class="card-footer text-danger" *ngIf="details!=null">
+            {{details.Date|date:'medium'}}
+          </div>
+        </div>
+
+
+      </div>
+    </div>
+
+  </body>
+</html>

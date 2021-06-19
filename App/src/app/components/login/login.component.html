@@ -11,25 +11,23 @@
 				</div>
 			</div>
 			<div class="card-body">
-				<form>
+				<form [formGroup]="loginForm">
 					<div class="input-group form-group">
 						<div class="input-group-prepend">
 							<span class="input-group-text"><i class="fas fa-user"></i></span>
 						</div>
-						<input type="email" name="email" [(ngModel)]="loginUserData.email"  class="form-control" placeholder="Email">
+						<input type="email" formControlName="email"  required class="form-control" placeholder="Email">
 
 					</div>
 					<div class="input-group form-group">
 						<div class="input-group-prepend">
 							<span class="input-group-text"><i class="fas fa-key"></i></span>
 						</div>
-						<input type="Password" class="form-control" [(ngModel)]="loginUserData.password" name="password" placeholder="password">
+						<input type="Password" class="form-control"  required formControlName="password" placeholder="password">
 					</div>
-					<div class="row align-items-center remember">
-						<input type="checkbox">Remember Me
-					</div>
+
 					<div class="form-group">
-						<input type="submit" (click)="loginUser()" value="Login" class="btn float-right login_btn">
+						<input type="submit" (click)="loginUser(loginForm.value)" [disabled]="!loginForm.valid"  value="Login" class="btn float-right login_btn">
 					</div>
 				</form>
 			</div>
@@ -37,9 +35,7 @@
 				<div class="d-flex justify-content-center links">
 					Don't have an account?<a href="/register">Sign Up</a>
 				</div>
-				<div class="d-flex justify-content-center">
-					<a href="#">Forgot your password?</a>
-				</div>
+
 			</div>
 		</div>
 	</div>

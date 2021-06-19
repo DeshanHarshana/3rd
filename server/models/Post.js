@@ -5,7 +5,7 @@ const postSchema =mongoose.Schema({
 
     Uid:String,
     Title:String,
-    
+    PostImage:String,
     Date:String,
     Content:String
 })

@@ -1679,7 +1679,7 @@ a.text-white:focus {
 .inputfile + label {
   font-size:small;
   font-weight: 700;
-  color: white;
+  color: green;
   background-color: black;
   display: inline-block;
 }

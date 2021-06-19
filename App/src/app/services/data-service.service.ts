@@ -27,7 +27,20 @@ export class DataServiceService {
 
     return this._http.post<any>("http://localhost:3000/addpost", posts);
   }
-  getPost(id){
+  getPosts(id):Observable<any>{
+    return this._http.get<any>("http://localhost:3000/getPosts/"+id);
+  }
+  getPost(id):Observable<any>{
     return this._http.get<any>("http://localhost:3000/getPost/"+id);
+  }
+  updatePost(id, post){
+    return this._http.put<any>("http://localhost:3000/update-post/"+id, post);
+  }
+  deletePost(id){
+    return this._http.delete("http://localhost:3000/delete-post/"+id);
+  }
+  postImage(id,image:any){
+
+    return this._http.post<any>("http://localhost:3000/post/"+id+"/uploadPhoto", image);
   }
 }

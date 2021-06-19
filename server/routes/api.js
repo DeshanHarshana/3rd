@@ -12,6 +12,7 @@ const mailgun = require("mailgun-js");
 const DOMAIN = 'sandboxc32dc6a915c7493eb5f539e8c8129919.mailgun.org';
 const mg = mailgun({apiKey: '4ca8a4335b4d7f733f49be26c745dc3d-90ac0eb7-d26ba9a2', domain: DOMAIN});
 var oldProfileLink="";
+var currentPostimage="";
 mongoose.connect(db, {useNewUrlParser: true,
     useUnifiedTopology: true,
     useCreateIndex: true,
@@ -56,10 +57,11 @@ router.get('/check', async function(req,res){
 
 router.post('/addpost', function(req,res){
     console.log("Update User Data");
-       console.log(req.body);
+      
                     let postData={
                         Uid:req.body.Uid,
                         Title:req.body.Title,
+                        PostImage:'https://img.traveltriangle.com/blog/wp-content/uploads/2019/07/Kyoto-Waterfalls-cover.jpg',
                         Date:req.body.Date,
                         Content:req.body.Content
                     }
@@ -78,7 +80,7 @@ router.post('/addpost', function(req,res){
      
 });
 
-router.get('/getPost/:id', function(req,res){
+router.get('/getPosts/:id', function(req,res){
     Post.find({Uid:req.params.id}, function(err, result){
         if(err){
             console.log(err);
@@ -87,6 +89,17 @@ router.get('/getPost/:id', function(req,res){
         }
     });
 });
+router.get('/getPost/:id', function(req,res){
+    Post.findOne({_id:req.params.id}, function(err, result){
+        if(err){
+            console.log(err);
+        }else{
+            res.json(result);
+            currentPostimage= result.PostImage.split("/")[5];
+            console.log(currentPostimage);
+        }
+    })
+})
 
 router.get('/', function(req,res){
     res.send('From api route!');
@@ -364,33 +377,33 @@ router.get('/events', (req,res)=>{
     res.json(events)
 })
 
-
-
-router.get('/special', verifyToken, (req,res)=>{
-    let events=[
-        {
-            "id":"1",
-            "name":"Auto Expo",
-            "description":"lorem ksd",
-            "date":"2021/2/3"
-        },
-        {
-            "id":"1",
-            "name":"Auto Expo",
-            "description":"lorem ksd",
-            "date":"2021/2/3"
-        },
-        {
-            "id":"1",
-            "name":"Auto Expo",
-            "description":"lorem ksd",
-            "date":"2021/2/3"
-        }
-    ]
-    res.json(events)
+router.put('/update-post/:id', function(req,res){
+    console.log("Update Post Data");
+    console.log(req.body);
+    Post.findByIdAndUpdate(req.params.id,
+     {
+       $set:{
+          Title:req.body.Title,
+          Content:req.body.Content
+       }
+     },
+       {
+         new :true
+       },
+       function(err,Userdata){
+         if(err){
+           res.send("Error updation userdata");
+         }else{
+         
+         res.send(Userdata);
+         }
+       }
+ 
+);
 })
 
-const imageUpload = require('../healper/storage')
+const imageUpload = require('../healper/storage');
+const { RSA_NO_PADDING } = require('constants');
 //
 router.post('/profile/:userid/uploadPhoto', imageUpload.uploadImage().array('profileImage'), (req, res, next)=>{
     console.log("dfgfd" + req.files[0].filename);
@@ -441,8 +454,69 @@ router.post('/profile/:userid/uploadPhoto', imageUpload.uploadImage().array('pro
     }
 })
 
-router.delete('/delete', (req,res)=>{
+
+const postupload = require('../healper/storagePost');
+//const { RSA_NO_PADDING } = require('constants');
+//
+router.post('/post/:postid/uploadPhoto', postupload.uploadImage().array('PostImage'), (req, res, next)=>{
+    console.log("dfgfd" + req.files[0].filename);
+    const imagePath = 'http://localhost:3000/images/post/' + req.files[0].filename;
     
+    if(req.files){
+       console.log("file has");
+       console.log(req.params.postid)
+        Post.findByIdAndUpdate(req.params.postid,
+            {
+              $set:{
+                     PostImage:imagePath
+              }
+            },
+              {
+                new :true
+              },
+              function(err,Postdata){
+                if(err){
+                  res.send("Error updation userdata");
+                }else{
+                  res.json(Postdata);
+                  console.log("uload post image");
+              
+                }
+              }
+        
+            );
+
+    }
+})
+
+router.delete('/delete-post/:id', (req,res)=>{
+    Post.deleteOne({ _id: req.params.id }, function(err,post) {
+        if (!err) {
+                console.log("delete Success")
+                res.json(post)
+                const fs = require('fs')
+    
+                const path = "./images/post/"+currentPostimage;
+                console.log(path);
+                try {
+                    fs.unlink(path, (err) => {
+                        if (err) {
+                          console.error(err)
+                          return;
+                        }
+                      
+                       console.log("old image deleted");
+                      })
+                  } catch (error) {
+                      console.log(error);
+                  }
+                
+        }
+        else {
+                console.log("delete Faild")
+             res.status(404).send("Failed");
+        }   
+    });
 })
 
 

@@ -5,40 +5,51 @@
     <meta charset="utf-8" />
     <title>New Blog Post Template | PrepBootstrap</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
+    <script src="https://cdn.ckeditor.com/ckeditor5/28.0.0/classic/ckeditor.js"></script>
 
 
 </head>
 <body>
+  <div class="loader-container" *ngIf="loaderService.isLoading|async">
+    <mat-progress-spinner mode="indeterminate" style="top:50%; left:50%;"></mat-progress-spinner>
+  </div>
+<div class="container" style="padding-top: 4%; padding-bottom: 2%;">
 
-<div class="container">
-
-<div class="page-header">
-    <h1>New Blog Post <small>A responsive blog post template</small></h1>
-</div>
 
 <!-- New Blog Post - START -->
-
-  <div class="container">
+<div class="card text-center shadow-lg p-3 mb-5 bg-white rounded border-primary mb-3">
+  <div class="container" >
+    <h1 class="text-center">Create Post</h1>
     <div class="row" id="row_style">
-        <h4 class="text-center">Submit new post</h4>
-        <div class="col-md-4   col-md-offset-4">
+        <div class="col">
           <form [formGroup]="postgroup">
             <div class="form-group">
-                <input type="text" formControlName="Title" class="form-control" placeholder="Title">
+                <input type="text"  formControlName="Title" class="form-control" placeholder="Title"><br>
+                <div class="row-center">
+                  <img [src]="imageData" width="200px" height="200px">
+                </div>
+                <div class="row-center">
+                <input type="file" class="inputfile" (change)="onFileSelect($event)" name="file" id="file" >
+                <label for="file" class="btn btn-close">Choose a Post Display Image</label>
+              </div>
             </div>
-            <textarea formControlName="Content" cols="30" rows="10">Submit your text post here...</textarea>
+            <ckeditor [editor]="Editor" [config]="config" formControlName="Content"></ckeditor>
             <br>
 
             <div>
-                <button class="btn btn-primary" (click)="submitPost(postgroup.value)">Submit new post</button>
+                <button class="btn btn-primary"  (click)="submitPost(postgroup.value)">Submit new post</button>
             </div>
           </form>
+
         </div>
 
-    </div>
-</div>
+        <br>
 
+    </div>
+
+</div>
+</div>
+<!-- -->
 
 <style>
     #row_style {

@@ -36,6 +36,11 @@ import { ToastrModule } from 'ngx-toastr';
 import { VerifiedSuccessComponent } from './components/verified-success/verified-success.component';
 import { ProfileComponent } from './components/profile/profile.component';
 import { PostmakeComponent } from './components/postmake/postmake.component';
+import { EditpostComponent } from './components/editpost/editpost.component';
+import { ViewpostComponent } from './components/viewpost/viewpost.component';
+import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
+import { InterceptorService } from './loader/interceptor.service';
+
 
 @NgModule({
   declarations: [
@@ -49,9 +54,12 @@ import { PostmakeComponent } from './components/postmake/postmake.component';
     VerifiedSuccessComponent,
     ProfileComponent,
     PostmakeComponent,
+    EditpostComponent,
+    ViewpostComponent,
 
   ],
   imports: [
+    CKEditorModule,
     ToastrModule.forRoot(),
     BrowserModule,
     FormsModule,
@@ -77,11 +85,18 @@ import { PostmakeComponent } from './components/postmake/postmake.component';
 
   ],
   providers: [AuthService, EventService, AuthGuard, DataServiceService,
+    {
+      provide:HTTP_INTERCEPTORS,
+      useClass:InterceptorService,
+      multi:true
+    },
   {
     provide:HTTP_INTERCEPTORS,
     useClass:TokenInterceptorService,
     multi:true
-  }],
+  },
+
+],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

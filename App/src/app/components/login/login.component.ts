@@ -3,16 +3,17 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
 import { ToastrService } from 'ngx-toastr';
+import { FormControl, FormGroup } from '@angular/forms';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
-loginUserData={
-  email:'',
-  password:''
-}
+  loginForm=new FormGroup({
+    email:new FormControl(''),
+    password:new FormControl('')
+  })
   constructor(
     public _auth:AuthService,
     public router:Router,
@@ -24,8 +25,8 @@ loginUserData={
   showSuccess(message:String) {
     this.toastr.warning(message.toString(), "Login Failed");
    }
-  loginUser(){
-    this._auth.loginUser(this.loginUserData).subscribe(
+  loginUser(form){
+    this._auth.loginUser(form).subscribe(
       res=>{
         if(res.nouser=='yes'){
           this.showSuccess("User not Exist")

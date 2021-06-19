@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
+import { EditpostComponent } from './components/editpost/editpost.component';
 import { EventsComponent } from './components/events/events.component';
 import { LoginComponent } from './components/login/login.component';
 import { PostmakeComponent } from './components/postmake/postmake.component';
@@ -9,6 +10,7 @@ import { RegisterComponent } from './components/register/register.component';
 import { RootComponent } from './components/root/root.component';
 import { SpecialComponent } from './components/special/special.component';
 import { VerifiedSuccessComponent } from './components/verified-success/verified-success.component';
+import { ViewpostComponent } from './components/viewpost/viewpost.component';
 import { AuthGuard } from './gurad/auth.guard';
 
 const routes: Routes = [
@@ -22,7 +24,9 @@ canActivate : [AuthGuard]
 },
 {path:'email-verify', component:VerifiedSuccessComponent},
 {path:'profile/:id', component:ProfileComponent},
-{path:'add-post/:id', component:PostmakeComponent}
+{path:'add-post/:id', component:PostmakeComponent},
+{path:'view-post/:id', component:ViewpostComponent},
+{path:'update-post/:id', component:EditpostComponent}
 ];
 
 @NgModule({
@@ -36,5 +40,6 @@ export const AppRoutingComponent=[
   RootComponent,
   VerifiedSuccessComponent,
   ProfileComponent,
-  PostmakeComponent
+  PostmakeComponent,
+  EditpostComponent
 ]

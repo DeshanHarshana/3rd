@@ -1,0 +1,18 @@
+h3 {
+  width: 100%;
+white-space:pre;
+text-align: justify;
+  overflow:hidden;
+  text-overflow:ellipsis;
+}
+h1{
+  font-size: 50px;
+}
+.loader-container{
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  background: black;
+  opacity: 0.8;
+  z-index: 99;
+}
