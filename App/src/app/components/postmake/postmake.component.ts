@@ -90,9 +90,11 @@ this.showSuccess("Please select Post Main Image");
 	toolbar: {
 		items: [
 			'heading',
-			'|',
+
 			'bold',
-			'italic',
+      'italic',
+
+      'clipboard',
 			'link',
 			'bulletedList',
 			'numberedList',
@@ -105,22 +107,16 @@ this.showSuccess("Please select Post Main Image");
 			'insertTable',
 			'mediaEmbed',
 			'undo',
-			'redo'
+			'redo',
 
 		],
-		toolbar: [
-			'imageStyle:alignLeft', 'imageStyle:alignCenter', 'imageStyle:alignRight',
-			'|',
-			'resizeImage',
-			'|',
-			'imageTextAlternative'
-		]
+    supportAllValues: true
 	},
+
+
+
   image: {
     // Configure the available styles.
-    styles: [
-        'alignLeft', 'alignCenter', 'alignRight'
-    ],
 
     // Configure the available image resize options.
     resizeOptions: [

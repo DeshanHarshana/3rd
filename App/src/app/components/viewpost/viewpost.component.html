@@ -3,9 +3,9 @@
     <div class="loader-container" *ngIf="loaderService.isLoading|async">
       <mat-progress-spinner mode="indeterminate" style="top:50%; left:50%;"></mat-progress-spinner>
     </div>
-    <div class="row mt-1 center" style="padding-top: 5%; padding-left:15%">
-      <div class="col-md-10 "  >
-        <div class="card text-center shadow-lg p-3 mb-5 bg-white rounded  border-primary mb-3" style="padding-top: 2%; padding-bottom: 2%;">
+    <div class="row  center" style="padding-top: 5%; padding-left:15%; background-color:#e3c8c8">
+      <div class="col-md-10 ">
+        <div class="card text-center shadow-lg p-3 mb-5 rounded  border-primary mb-3">
           <div class="card-body">
             <h1 class="card-title" *ngIf="details!=null">{{details.Title}}</h1><br>
             <ckeditor *ngIf="details!=null" [editor]="Editor" [config]="config" [disabled]="true"  [(data)]="details.Content"></ckeditor>

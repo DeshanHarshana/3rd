@@ -1,15 +1,26 @@
 
-<div class="row mt-5">
-  <div class="col-md-4 mb-3" *ngFor="let event of events">
-    <div class="card text-center">
-      <div class="card-body">
-        <h5 class="card-title">{{event.name}}</h5>
-        <p class="card-text">{{event.description}}</p>
-        <a href="#" class="btn btn-primary">Buy Tickets</a>
-      </div>
-      <div class="card-footer text-muted">
-        {{event.date | date:'shortDate'}}
+<html>
+  <body background="./assets/wp3264044.jpg">
+    <div class="loader-container" *ngIf="loaderService.isLoading|async">
+      <mat-progress-spinner mode="indeterminate" style="top:50%; left:50%;"></mat-progress-spinner>
+    </div>
+    <div class="row">
+
+      <div class="col mb-4" *ngFor="let event of specialevents">
+
+        <div class="card">
+          <img [src]="event.PostImage">
+          <div class="info">
+            <h1>{{event.Title}}</h1>
+            <button class="btn" (click)=show(event._id)>Read More</button>
+
+          </div>
+
+        </div>
       </div>
     </div>
-  </div>
-</div>
+
+
+
+  </body>
+</html>

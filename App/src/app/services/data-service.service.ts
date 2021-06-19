@@ -43,4 +43,7 @@ export class DataServiceService {
 
     return this._http.post<any>("http://localhost:3000/post/"+id+"/uploadPhoto", image);
   }
+  getAllPosts(){
+    return this._http.get<any>("http://localhost:3000/getAllPost/");
+  }
 }

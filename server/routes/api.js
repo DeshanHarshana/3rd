@@ -79,6 +79,15 @@ router.post('/addpost', function(req,res){
                     
      
 });
+router.get('/getAllPost', function(req,res){
+    Post.find({}, function(err, result){
+        if(err){
+            console.log(err);
+        }else{
+            res.json(result);
+        }
+    });
+});
 
 router.get('/getPosts/:id', function(req,res){
     Post.find({Uid:req.params.id}, function(err, result){
@@ -318,64 +327,6 @@ router.post('/login',(req,res)=>{
     })
 })
 
-router.get('/events', (req,res)=>{
-    let events=[
-        {
-            "id":"1",
-            "name":"Auto Expo",
-            "description":"lorem ksd",
-            "date":"2021/2/3"
-        },
-        {
-            "id":"1",
-            "name":"Auto Expo",
-            "description":"lorem ksd",
-            "date":"2021/2/3"
-        },
-        {
-            "id":"1",
-            "name":"Auto Expo",
-            "description":"lorem ksd",
-            "date":"2021/2/3"
-        },
-        {
-            "id":"1",
-            "name":"Auto Expo",
-            "description":"lorem ksd",
-            "date":"2021/2/3"
-        },
-        {
-            "id":"1",
-            "name":"Auto Expo",
-            "description":"lorem ksd",
-            "date":"2021/2/3"
-        },
-        {
-            "id":"1",
-            "name":"Auto Expo",
-            "description":"lorem ksd",
-            "date":"2021/2/3"
-        }, {
-            "id":"1",
-            "name":"Auto Expo",
-            "description":"lorem ksd",
-            "date":"2021/2/3"
-        },
-        {
-            "id":"1",
-            "name":"Auto Expo",
-            "description":"lorem ksd",
-            "date":"2021/2/3"
-        },
-        {
-            "id":"1",
-            "name":"Auto Expo",
-            "description":"lorem ksd",
-            "date":"2021/2/3"
-        },
-    ]
-    res.json(events)
-})
 
 router.put('/update-post/:id', function(req,res){
     console.log("Update Post Data");

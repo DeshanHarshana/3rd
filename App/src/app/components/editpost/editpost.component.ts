@@ -40,9 +40,11 @@ this._dataService.updatePost(this.route.snapshot.params.id, editValue).subscribe
     toolbar: {
       items: [
         'heading',
-        '|',
+
         'bold',
         'italic',
+        'underline',
+        'clipboard',
         'link',
         'bulletedList',
         'numberedList',
@@ -55,22 +57,16 @@ this._dataService.updatePost(this.route.snapshot.params.id, editValue).subscribe
         'insertTable',
         'mediaEmbed',
         'undo',
-        'redo'
+        'redo',
 
       ],
-      toolbar: [
-        'imageStyle:alignLeft', 'imageStyle:alignCenter', 'imageStyle:alignRight',
-        '|',
-        'resizeImage',
-        '|',
-        'imageTextAlternative'
-      ]
+      supportAllValues: true
     },
+
+
+
     image: {
       // Configure the available styles.
-      styles: [
-          'alignLeft', 'alignCenter', 'alignRight'
-      ],
 
       // Configure the available image resize options.
       resizeOptions: [
@@ -100,6 +96,7 @@ this._dataService.updatePost(this.route.snapshot.params.id, editValue).subscribe
           '|',
           'imageTextAlternative'
       ]
+
   },
 
     // This value must be kept in sync with the language defined in webpack.config.js.
