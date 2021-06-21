@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
 import { ToastrService } from 'ngx-toastr';
 import { FormControl, FormGroup } from '@angular/forms';
+import { DataServiceService } from 'src/app/services/data-service.service';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -17,7 +18,8 @@ export class LoginComponent implements OnInit {
   constructor(
     public _auth:AuthService,
     public router:Router,
-    public toastr:ToastrService
+    public toastr:ToastrService,
+    public dataService:DataServiceService
   ) { }
 
   ngOnInit(): void {
@@ -41,7 +43,9 @@ export class LoginComponent implements OnInit {
             console.log(res)
             localStorage.setItem('token', res.token)
             localStorage.setItem('currentUser', res.uid);
+            localStorage.setItem('userName', res.userName);
             localStorage.setItem('email','true');
+            localStorage.setItem('ProfileImage',res.ProfileImage);
             console.log(localStorage.getItem('currentUser'));
             this.router.navigate(['/special'])
 

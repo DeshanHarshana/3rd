@@ -4,6 +4,7 @@ const dotenv = require('dotenv');
 const mongoose=require('mongoose');
 const User = require('../models/User');
 const Post = require('../models/Post');
+const Comment=require('../models/Comments')
 const jwt=require('jsonwebtoken');
 const storage = require('../healper/storage')
 const { static } = require('express');
@@ -55,6 +56,34 @@ router.get('/check', async function(req,res){
    
 })
 
+router.put('/deletecomment', function(req, res){
+    Post.findOneAndUpdate(
+        {
+            _id:req.body.postid,
+        },
+        {
+            $pull:{
+                Comments:{
+                    _id:req.body.commentid
+                }
+            }
+        },
+        
+        
+           
+          function(err,Userdata){
+            if(err){
+              res.send("Error updation userdata");
+            }else{
+            
+            console.log("update success " )
+            res.send(Userdata)
+            }
+          
+    
+    })
+});
+
 router.post('/addpost', function(req,res){
     console.log("Update User Data");
       
@@ -63,10 +92,33 @@ router.post('/addpost', function(req,res){
                         Title:req.body.Title,
                         PostImage:'https://img.traveltriangle.com/blog/wp-content/uploads/2019/07/Kyoto-Waterfalls-cover.jpg',
                         Date:req.body.Date,
-                        Content:req.body.Content
+                        Content:req.body.Content,
+                        Comments:[]
                     }
                 
                     let post=new Post(postData)
+                    post.save((error,post)=>{
+                        if(error){
+                            console.log(error);
+                        }
+                        else{
+                            res.status(200).send(post);
+                        }
+                    });
+                    
+                    
+     
+});
+
+
+router.post('/addcomment', function(req,res){
+    
+      
+                    let postData={
+                        Comments:req.body.Comments
+                    }
+                
+                    let post=new Comment(postData)
                     post.save((error,post)=>{
                         if(error){
                             console.log(error);
@@ -259,12 +311,33 @@ async function getuidFromEmail(email_address){
    return releventUser._id;
 }
 
+router.put('/updatecomment/:id', function(req, res){
+   console.log(req.body);
+    Post.findByIdAndUpdate(req.params.id, {
+        $push:{
+            Comments:[req.body]
+        },
+        
+            new :true
+    },
+          function(err,Userdata){
+            if(err){
+              res.send("Error updation userdata");
+            }else{
+            
+            console.log("update success " );
+            res.status(200).send(Userdata)
+            }
+          
+    
+    })
+})
 
 
 router.put('/update/:id', function(req,res){
         console.log("Update User Data");
-       console.log(req.body);
-       User.findByIdAndUpdate(req.params.id,
+       console.log(req.params.id);
+       User.findByIdAndUpdate(_id=req.params.id,
         {
           $set:{
              firstname:req.body.firstname,
@@ -320,7 +393,9 @@ router.post('/login',(req,res)=>{
            // res.send({'uid':user._id});
             res.send({
                 'token':token,
-                'uid':user._id
+                'uid':user._id,
+                'userName':user.firstname,
+                'ProfileImage':user.profileImage
             });
             }
         }
@@ -407,6 +482,7 @@ router.post('/profile/:userid/uploadPhoto', imageUpload.uploadImage().array('pro
 
 
 const postupload = require('../healper/storagePost');
+const Comments = require('../models/Comments');
 //const { RSA_NO_PADDING } = require('constants');
 //
 router.post('/post/:postid/uploadPhoto', postupload.uploadImage().array('PostImage'), (req, res, next)=>{

@@ -40,7 +40,8 @@ import { EditpostComponent } from './components/editpost/editpost.component';
 import { ViewpostComponent } from './components/viewpost/viewpost.component';
 import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
 import { InterceptorService } from './loader/interceptor.service';
-
+import {CommonModule} from '@angular/common';
+import { SortDatePipe } from './pipes/sort-date.pipe';
 
 @NgModule({
   declarations: [
@@ -56,9 +57,11 @@ import { InterceptorService } from './loader/interceptor.service';
     PostmakeComponent,
     EditpostComponent,
     ViewpostComponent,
+    SortDatePipe,
 
   ],
   imports: [
+    CommonModule,
     CKEditorModule,
     ToastrModule.forRoot(),
     BrowserModule,

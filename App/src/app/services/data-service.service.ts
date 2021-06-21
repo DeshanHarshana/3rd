@@ -7,8 +7,8 @@ import { User } from '../models/user';
   providedIn: 'root'
 })
 export class DataServiceService {
-  public _profileUrl="http://localhost:3000/profile/";
-  public _updateProfileDetails="http://localhost:3000/update/"+localStorage.getItem('currentUser');
+
+
   public _postLink="";
   constructor(
     public _http:HttpClient,
@@ -17,10 +17,10 @@ export class DataServiceService {
 
    getUserData(id){
     console.log("data service " + id);
-    return this._http.get(this._profileUrl+id);
+    return this._http.get("http://localhost:3000/profile/"+id);
   }
   updateProfileDetails(details){
-    return this._http.put<any>(this._updateProfileDetails, details);
+    return this._http.put<any>("http://localhost:3000/update/"+localStorage.getItem('currentUser'), details);
   }
   postPost(posts){
     console.log("Post data " + posts)
@@ -45,5 +45,11 @@ export class DataServiceService {
   }
   getAllPosts(){
     return this._http.get<any>("http://localhost:3000/getAllPost/");
+  }
+  postComment(id, comment){
+    return this._http.put<any>("http://localhost:3000/updatecomment/"+id,comment);
+  }
+  deleteComment(value){
+    return this._http.put<any>("http://localhost:3000/deletecomment", value);
   }
 }

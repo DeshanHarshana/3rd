@@ -65,6 +65,11 @@ export class AuthService {
         localStorage.removeItem('token');
     localStorage.removeItem('currentUser');
     localStorage.removeItem('login');
+    localStorage.removeItem('userName');
+    localStorage.removeItem("login");
+    localStorage.removeItem('email');
+    localStorage.removeItem('postid');
+    localStorage.removeItem('ProfileImage');
     this.router.navigate(['/events'])
 
       } else if (result.isDismissed) {

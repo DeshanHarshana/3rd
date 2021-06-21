@@ -15,10 +15,42 @@
           <div class="card-footer text-danger" *ngIf="details!=null">
             {{details.Date|date:'medium'}}
           </div>
+
+          <div style="text-align: right;">
+<form [formGroup]="cmt">
+            <textarea class="form-control" formControlName="Comment" placeholder="Comment your idea"></textarea>
+            <button class="btn btn-success" (click)="addComment(cmt.value)">Comment</button>
+          </form>
+          </div>
+          <ng-container *ngIf="details!=null" class="container">
+            <div class="be-comment" *ngFor="let cm of (comments | sortDate)">
+              <div class="be-img-comment">
+
+                  <img [src]="cm.ProfileImage" alt="" class="be-ava-comment">
+
+              </div>
+              <div class="be-comment-content">
+
+                <span class="be-comment-name">
+                  {{cm.Uname}}
+                  </span>
+                <span class="be-comment-time">
+                  {{cm.Date|date:'short'}}
+                  <a (click)="deleteComment(cm._id)" [hidden]="checkUser(cm.Userid)">delete</a>
+                </span>
+
+              <p class="be-comment-text">
+               {{cm.Comment}}
+              </p>
+            </div>
+
+                              </div>
+                            </ng-container>
         </div>
 
 
       </div>
+
     </div>
 
   </body>
