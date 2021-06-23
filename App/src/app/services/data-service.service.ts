@@ -52,4 +52,7 @@ export class DataServiceService {
   deleteComment(value){
     return this._http.put<any>("http://localhost:3000/deletecomment", value);
   }
+  getSpecificPost(value){
+    return this._http.get<any>("http://localhost:3000/getSpecificPost/"+value);
+  }
 }

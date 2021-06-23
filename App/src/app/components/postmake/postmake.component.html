@@ -25,6 +25,10 @@
           <form [formGroup]="postgroup">
             <div class="form-group">
                 <input type="text"  formControlName="Title" class="form-control" placeholder="Title"><br>
+                <select class="custom-select" (change)="changeCity($event)" formControlName="Category">
+                  <option value="" disabled>Choose your post Category</option>
+                  <option *ngFor="let c of Cg" [ngValue]="c">{{c}}</option>
+               </select>
                 <div class="row-center">
                   <img [src]="imageData" width="200px" height="200px">
                 </div>

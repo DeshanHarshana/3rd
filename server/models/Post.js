@@ -7,6 +7,7 @@ const postSchema =mongoose.Schema({
     Title:String,
     PostImage:String,
     Date:String,
+    Category:String,
     Content:String,
     Comments: [{
       Userid:String,

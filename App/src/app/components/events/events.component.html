@@ -4,6 +4,19 @@
     <div class="loader-container" *ngIf="loaderService.isLoading|async">
       <mat-progress-spinner mode="indeterminate" style="top:50%; left:50%;"></mat-progress-spinner>
     </div>
+    <div class="row>" style="padding-bottom: 100px;">
+      <div class="col">
+        <nav>
+          <a (click)="goAll()">All</a>
+          <a (click)="goTech()">Technology</a>
+          <a (click)="goTradi()">Traditional</a>
+          <a (click)="goEconomy()">Echonome</a>
+          <a (click)="goOther()">Other</a>
+
+          <div class="animation start-home"></div>
+        </nav>
+      </div>
+    </div>
     <div class="row">
 
       <div class="col mb-4" *ngFor="let event of specialevents">

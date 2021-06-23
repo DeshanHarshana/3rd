@@ -92,6 +92,7 @@ router.post('/addpost', function(req,res){
                         Title:req.body.Title,
                         PostImage:'https://img.traveltriangle.com/blog/wp-content/uploads/2019/07/Kyoto-Waterfalls-cover.jpg',
                         Date:req.body.Date,
+                        Category:req.body.Category,
                         Content:req.body.Content,
                         Comments:[]
                     }
@@ -141,6 +142,15 @@ router.get('/getAllPost', function(req,res){
     });
 });
 
+router.get('/getSpecificPost/:name', function(req, res){
+    Post.find({Category: req.params.name}, function(err, result){
+        if(err){
+            console.log(err);
+        }else{
+            res.json(result);
+        }
+    })
+})
 router.get('/getPosts/:id', function(req,res){
     Post.find({Uid:req.params.id}, function(err, result){
         if(err){

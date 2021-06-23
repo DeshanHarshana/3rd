@@ -13,17 +13,23 @@ import { ToastrService } from 'ngx-toastr';
 export class PostmakeComponent implements OnInit {
   readonly:boolean=true;
   public Editor = ClassicEditor;
+  cgVal:string="other";
   imageData:string; //temp save
   image:File;
   titleImage:boolean=true;
   uploadButton:boolean=true;
-
+  Cg: any = ['Technology', 'Traditional', 'Economic', 'Other']
+  changeCity(e) {
+   console.log(e.target.value.toString().split(':')[1].trim());
+    //this.postgroup.get('Category').setValue(e.target.value)
+  }
   currentDate = new Date();
   postgroup = new FormGroup({
     Uid:new FormControl(localStorage.getItem('currentUser')),
     Title:new FormControl(''),
     Date:new FormControl(this.currentDate),
-    Content:new FormControl('')
+    Content:new FormControl(''),
+    Category:new FormControl('')
 
   })
 
@@ -70,7 +76,11 @@ this.uploadButton=true;
   }
   submitPost(post){
     if(this.titleImage==false){
-    console.log(post)
+  //
+    if(this.postgroup.get('Category').value=="" || this.postgroup.get('Category').value=="Choose your post Category" ){
+      this.showSuccess("Please select Category");
+    }else{
+      console.log(post)
 this._dataService.postPost(post).subscribe((res)=>{
   console.log(res);
   this.uploadImage(res._id);
@@ -79,8 +89,10 @@ this._dataService.postPost(post).subscribe((res)=>{
     console.log(res);
 
 
-})
+});
+    }
   }
+
   else{
 this.showSuccess("Please select Post Main Image");
   }

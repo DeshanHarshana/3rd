@@ -12,7 +12,7 @@ import { EventService } from 'src/app/services/event.service';
   styleUrls: ['./events.component.css']
 })
 export class EventsComponent implements OnInit {
-  specialevents=[]
+  specialevents:any=[]
   constructor(
     public _event:DataServiceService,
     public router:Router,
@@ -37,5 +37,60 @@ export class EventsComponent implements OnInit {
 
   show(id){
     this.router.navigate(['view-post/'+id]);
+  }
+  goAll(){
+this.ngOnInit();
+  }
+  goTech(){
+    let Category= 'Technology'
+    this._event.getSpecificPost(Category)
+    .subscribe(
+      res=>this.specialevents=res,
+      err=>{
+        if(err instanceof HttpErrorResponse){
+          if(err.status===401){
+            this.router.navigate(['/login'])
+          }
+        }
+      }
+    );
+  }
+  goTradi(){
+
+    let Category= 'Traditional'
+
+      console.log(Category)
+      this._event.getSpecificPost(Category)
+      .subscribe((res)=>{
+        this.specialevents=res
+      }
+
+      );
+  }
+  goEconomy(){
+
+      let Category="Economic"
+
+console.log(Category)
+      this._event.getSpecificPost(Category)
+      .subscribe(
+        res=>this.specialevents=res
+
+
+      );
+  }
+  goOther(){
+    let Category= 'Other'
+      this._event.getSpecificPost(Category)
+      .subscribe(
+        res=>this.specialevents=res,
+        err=>{
+          if(err instanceof HttpErrorResponse){
+            if(err.status===401){
+              this.router.navigate(['/login'])
+            }
+          }
+        }
+      );
   }
 }
