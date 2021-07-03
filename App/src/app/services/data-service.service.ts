@@ -15,7 +15,7 @@ export class DataServiceService {
     public router:Router
   ) { }
 
-   getUserData(id){
+   getUserData(id):Observable<any>{
     console.log("data service " + id);
     return this._http.get("http://localhost:3000/profile/"+id);
   }
@@ -43,7 +43,7 @@ export class DataServiceService {
 
     return this._http.post<any>("http://localhost:3000/post/"+id+"/uploadPhoto", image);
   }
-  getAllPosts(){
+  getAllPosts():Observable<any>{
     return this._http.get<any>("http://localhost:3000/getAllPost/");
   }
   postComment(id, comment){
@@ -52,7 +52,7 @@ export class DataServiceService {
   deleteComment(value){
     return this._http.put<any>("http://localhost:3000/deletecomment", value);
   }
-  getSpecificPost(value){
+  getSpecificPost(value):Observable<any>{
     return this._http.get<any>("http://localhost:3000/getSpecificPost/"+value);
   }
 }

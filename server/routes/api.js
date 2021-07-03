@@ -1,13 +1,13 @@
 const express=require('express')
 const router=express.Router();
-const dotenv = require('dotenv');
+
 const mongoose=require('mongoose');
 const User = require('../models/User');
 const Post = require('../models/Post');
 const Comment=require('../models/Comments')
 const jwt=require('jsonwebtoken');
-const storage = require('../healper/storage')
-const { static } = require('express');
+
+
 const db="mongodb+srv://deshan:deshan2233@cluster0.4ynst.mongodb.net/3rd?retryWrites=true&w=majority";
 const mailgun = require("mailgun-js");
 const DOMAIN = 'sandboxc32dc6a915c7493eb5f539e8c8129919.mailgun.org';
@@ -46,15 +46,7 @@ function verifyToken(req,res,next){
     }
 }
 
-router.get('/check', async function(req,res){
-    
-     let result = await getuidFromEmail("nawarathnadeshan@gmail.com");
-     console.log(result);
-     res.send(result)
-    
-      
-   
-})
+
 
 router.put('/deletecomment', function(req, res){
     Post.findOneAndUpdate(
@@ -90,6 +82,7 @@ router.post('/addpost', function(req,res){
                     let postData={
                         Uid:req.body.Uid,
                         Title:req.body.Title,
+                        Owner:req.body.Owner,
                         PostImage:'https://img.traveltriangle.com/blog/wp-content/uploads/2019/07/Kyoto-Waterfalls-cover.jpg',
                         Date:req.body.Date,
                         Category:req.body.Category,
@@ -191,7 +184,7 @@ router.post('/register',function(req,res){
                 let userData={
                     email:req.body.email,
                     password:req.body.password,
-                    emailVerified:false,
+                    emailVerified:true,
                     firstname:req.body.firstname,
                     emailToken:'',
                     profileImage:'https://i.pinimg.com/236x/65/25/a0/6525a08f1df98a2e3a545fe2ace4be47.jpg',
@@ -298,28 +291,6 @@ router.get('/email-verify/:id', function(req,res){
         console.log(err)
     }
 })
-
-async function getuidFromEmail(email_address){
-    var releventUser;
-   await User.findOne({email:email_address},(err,user)=>{
-        
-        if(err){
-            console.log(err)
-            
-        }
-        else if(user)
-        {
-            releventUser=user;
-          
-        }
-        else
-        {
-              console.log("error");
-              
-        }
-    });
-   return releventUser._id;
-}
 
 router.put('/updatecomment/:id', function(req, res){
    console.log(req.body);

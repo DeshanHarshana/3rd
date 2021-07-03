@@ -15,6 +15,9 @@
           <div class="card-footer text-danger" *ngIf="details!=null">
             {{details.Date|date:'medium'}}
           </div>
+          <div *ngIf="details!=null">
+            by {{details.Owner}}
+          </div>
 
           <div style="text-align: right;">
 <form [formGroup]="cmt">
@@ -36,6 +39,7 @@
                   </span>
                 <span class="be-comment-time">
                   {{cm.Date|date:'short'}}
+
                   <a (click)="deleteComment(cm._id)" [hidden]="checkUser(cm.Userid)">delete</a>
                 </span>
 

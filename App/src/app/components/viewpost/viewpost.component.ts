@@ -31,6 +31,7 @@ export class ViewpostComponent implements OnInit {
 
   })
 
+
   public Editor = customBuild;
   config={
     toolbar:{

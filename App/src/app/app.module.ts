@@ -42,6 +42,7 @@ import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
 import { InterceptorService } from './loader/interceptor.service';
 import {CommonModule} from '@angular/common';
 import { SortDatePipe } from './pipes/sort-date.pipe';
+import { ProfileViewComponent } from './components/profile-view/profile-view.component';
 
 @NgModule({
   declarations: [
@@ -58,6 +59,7 @@ import { SortDatePipe } from './pipes/sort-date.pipe';
     EditpostComponent,
     ViewpostComponent,
     SortDatePipe,
+    ProfileViewComponent,
 
   ],
   imports: [

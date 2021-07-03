@@ -29,7 +29,8 @@ export class PostmakeComponent implements OnInit {
     Title:new FormControl(''),
     Date:new FormControl(this.currentDate),
     Content:new FormControl(''),
-    Category:new FormControl('')
+    Category:new FormControl(''),
+    Owner:new FormControl(localStorage.getItem('userName'))
 
   })
 

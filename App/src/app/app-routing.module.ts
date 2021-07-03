@@ -11,6 +11,7 @@ import { RootComponent } from './components/root/root.component';
 import { SpecialComponent } from './components/special/special.component';
 import { VerifiedSuccessComponent } from './components/verified-success/verified-success.component';
 import { ViewpostComponent } from './components/viewpost/viewpost.component';
+import { ProfileViewComponent } from './components/profile-view/profile-view.component';
 import { AuthGuard } from './gurad/auth.guard';
 
 const routes: Routes = [
@@ -26,7 +27,8 @@ canActivate : [AuthGuard]
 {path:'profile/:id', component:ProfileComponent},
 {path:'add-post/:id', component:PostmakeComponent},
 {path:'view-post/:id', component:ViewpostComponent},
-{path:'update-post/:id', component:EditpostComponent}
+{path:'update-post/:id', component:EditpostComponent},
+{path: 'view-profile/:id', component:ProfileViewComponent}
 ];
 
 @NgModule({
@@ -41,5 +43,6 @@ export const AppRoutingComponent=[
   VerifiedSuccessComponent,
   ProfileComponent,
   PostmakeComponent,
-  EditpostComponent
+  EditpostComponent,
+  ProfileViewComponent
 ]
